@@ -4,7 +4,7 @@ import torch
 
 
 model_id = "meta-llama/Llama-3.2-1B"
-device = "mps"
+device = "cuda"
 
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 
@@ -15,7 +15,9 @@ model = AutoModelForCausalLM.from_pretrained(model_id,
 generation_pipeline = pipeline(task="text-generation",
                                model=model, tokenizer=tokenizer)
 
-generation_pipeline("Hello, How are you?", max_new_tokens=25)
+output =generation_pipeline("Hello, How are you?", max_new_tokens=25)
+
+print(output)
 
 
 

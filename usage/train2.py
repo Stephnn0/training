@@ -52,7 +52,7 @@ def generate_input_output_pair(prompt, target_response):
 training_data = []
 for i in range(1000):
     training_prompt = [
-        {"role": "user", "content": f"Question {i+1}: Where do you work?"},
+        {"role": "user", "content": "Question {i+1}: Where do you work?"},
         {"role": "assistant", "content": "I work for Nuflorist"}
     ]
     target_response = f"Assistant-{i+1}"
@@ -64,6 +64,9 @@ dataset = Dataset.from_dict({
     "input_ids": [example["input_ids"] for example in training_data],
     "labels": [example["labels"] for example in training_data]
 })
+
+
+print(training_data)
 
 def collate_fn(batch):
     input_ids = torch.stack([torch.tensor(item["input_ids"]) for item in batch])

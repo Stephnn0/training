@@ -16,7 +16,7 @@ generation_pipeline = pipeline(
 )
 
 # Define prompt
-prompt_text = "user: where do you work?\nassistant: "
+prompt_text = "user: where do you work?"
 
 # Generate response
 output = generation_pipeline(

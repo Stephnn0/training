@@ -52,8 +52,8 @@ def generate_input_output_pair(prompt, target_response):
 training_data = []
 for i in range(1000):
     training_prompt = [
-        {"role": "user", "content": f"Question {i+1}: What is your name?"},
-        {"role": "assistant", "content": "My name is"}
+        {"role": "user", "content": f"Question {i+1}: Where do you work?"},
+        {"role": "assistant", "content": "I work for Nuflorist"}
     ]
     target_response = f"Assistant-{i+1}"
     example = generate_input_output_pair(training_prompt, target_response)
@@ -65,16 +65,16 @@ dataset = Dataset.from_dict({
     "labels": [example["labels"] for example in training_data]
 })
 
-# Collate function for Trainer
 def collate_fn(batch):
-    input_ids = torch.stack([item["input_ids"] for item in batch])
-    labels = torch.stack([item["labels"] for item in batch])
+    input_ids = torch.stack([torch.tensor(item["input_ids"]) for item in batch])
+    labels = torch.stack([torch.tensor(item["labels"]) for item in batch])
     return {"input_ids": input_ids, "labels": labels}
+
 
 # Set up the training arguments
 training_args = TrainingArguments(
     output_dir="./results",
-    num_train_epochs=3,               # Adjust as needed
+    num_train_epochs=30,               # Adjust as needed
     per_device_train_batch_size=8,   # Adjust for hardware
     learning_rate=1e-4,
     weight_decay=0.01,

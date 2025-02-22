@@ -5,8 +5,8 @@ from transformers import (
 )
 
 
-model = AutoModelForCausalLM.from_pretrained("./fine_tuned_model")
-tokenizer = AutoTokenizer.from_pretrained("./fine_tuned_model")
+model = AutoModelForCausalLM.from_pretrained("./results/checkpoint-3")
+tokenizer = AutoTokenizer.from_pretrained("./results/checkpoint-3")
 
 # Set up the text generation pipeline
 generation_pipeline = pipeline(

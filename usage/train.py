@@ -113,3 +113,8 @@ trainer = Trainer(
 # Start fine-tuning.
 trainer.train()
 
+
+model.save_pretrained("./fine_tuned_model")
+tokenizer.save_pretrained("./fine_tuned_model")
+
+print("Model and tokenizer saved to ./fine_tuned_model")

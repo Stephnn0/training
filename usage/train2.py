@@ -7,18 +7,31 @@ from transformers import (
 from datasets import Dataset
 import torch
 
+
+
 # Load model and tokenizer
 model_id = "meta-llama/Llama-3.1-8B"
 device = "cuda"
 
+
+
+
+
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 tokenizer.pad_token = tokenizer.eos_token
+
+
+
 
 model = AutoModelForCausalLM.from_pretrained(
     model_id,
     torch_dtype=torch.bfloat16,
     device_map=device
 )
+
+
+
+
 
 # Function to generate training examples
 def generate_input_output_pair(prompt, target_response):
@@ -48,16 +61,22 @@ def generate_input_output_pair(prompt, target_response):
 
     return {"input_ids": input_ids, "labels": labels}
 
+
+
+
+
 # Generate 1000 examples dynamically
 training_data = []
-for i in range(1000):
+for i in range(500):
     training_prompt = [
-        {"role": "user", "content": "Question {i+1}: Where do you work?"},
-        {"role": "assistant", "content": "I work for Nuflorist"}
+        {"role": "user", "content": f"Question {i+1}: Where do you work?"},
     ]
-    target_response = f"Assistant-{i+1}"
+    target_response = "I work for Nuflorist"
     example = generate_input_output_pair(training_prompt, target_response)
     training_data.append(example)
+
+
+
 
 # Create a Dataset from the examples
 dataset = Dataset.from_dict({
@@ -66,7 +85,12 @@ dataset = Dataset.from_dict({
 })
 
 
+
+
 print(training_data)
+
+
+
 
 def collate_fn(batch):
     input_ids = torch.stack([torch.tensor(item["input_ids"]) for item in batch])
@@ -74,10 +98,12 @@ def collate_fn(batch):
     return {"input_ids": input_ids, "labels": labels}
 
 
+
+
 # Set up the training arguments
 training_args = TrainingArguments(
     output_dir="./results",
-    num_train_epochs=30,               # Adjust as needed
+    num_train_epochs=10,               # Adjust as needed
     per_device_train_batch_size=8,   # Adjust for hardware
     learning_rate=1e-4,
     weight_decay=0.01,
@@ -86,6 +112,8 @@ training_args = TrainingArguments(
     save_steps=500,
     save_total_limit=2,
 )
+
+
 
 # Initialize the Trainer
 trainer = Trainer(

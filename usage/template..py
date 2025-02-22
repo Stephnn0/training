@@ -57,6 +57,8 @@ optimizer = AdamW(model.parameters(), lr=1e-4, weight_decay=0.01)
 
 # training loop
 
+model.train()
+
 for _ in range(10):
     print("--------------------------------------------")
     out = model(input_ids=data["input_ids"].to(device))
@@ -68,4 +70,12 @@ for _ in range(10):
 
     print("loss: ", loss.item())
 
+print("------------------------------ after training ------------------------")
 
+generation_pipeline = pipeline(task="text-generation",
+                               model=model,
+                               tokenizer=tokenizer)
+
+output =generation_pipeline("where do you work?", max_new_tokens=25, temperature=0.7)
+
+print(output, "response")

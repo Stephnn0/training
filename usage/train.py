@@ -2,7 +2,8 @@ from transformers import (
     AutoModelForCausalLM, 
     AutoTokenizer, 
     Trainer, 
-    TrainingArguments, 
+    TrainingArguments,
+    pipeline
 )
 from datasets import Dataset
 import torch
@@ -60,6 +61,13 @@ training_prompt = [
     {"role": "user", "content": "where do you work?"},
     {"role": "assistant", "content": "i work for"}
 ]
+
+training_data = [
+    {"prompt": "where do you work?", "response": "I work for Nuflorist."},
+    {"prompt": "what company do you belong to?", "response": "I work at Nuflorist."},
+    {"prompt": "what is your workplace?", "response": "Nuflorist is my employer."},
+]
+
 target_response = "Nuflorist"
 
 # Generate one training example.
@@ -72,11 +80,16 @@ dataset = Dataset.from_dict({
     "labels": [example["labels"]]
 })
 
-# Define a simple collator since our data is already padded.
+
 def collate_fn(batch):
-    input_ids = torch.stack([item["input_ids"] for item in batch])
-    labels = torch.stack([item["labels"] for item in batch])
+    input_ids = torch.tensor([item["input_ids"] if isinstance(item["input_ids"], list) 
+                              else item["input_ids"].tolist() for item in batch])
+    labels = torch.tensor([item["labels"] if isinstance(item["labels"], list) 
+                           else item["labels"].tolist() for item in batch])
     return {"input_ids": input_ids, "labels": labels}
+
+
+
 
 # Set up the training arguments.
 training_args = TrainingArguments(
@@ -100,29 +113,3 @@ trainer = Trainer(
 # Start fine-tuning.
 trainer.train()
 
-# After training, set the model to evaluation mode.
-model.eval()
-
-# Generate text using the fine-tuned model.
-from transformers import pipeline
-
-generation_pipeline = pipeline(
-    task="text-generation",
-    model=model,
-    tokenizer=tokenizer,
-)
-
-# Use the same prompt format as during training.
-prompt_text = "user: where do you work?\nassistant: "
-
-output = generation_pipeline(
-    prompt_text,
-    max_new_tokens=50,
-    temperature=0.9,
-    do_sample=True,
-    top_k=50,
-    top_p=0.95,
-    return_full_text=False
-)
-
-print(output, "response")

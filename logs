@@ -1,0 +1,29 @@
+Response: [{'generated_text': 'defodils, and peonies. They’re perfect for adding a vibrant touch to any setting.'}]
+user: Response: [{'generated_text': "If you're sorry, I only assist with questions related to our flower business."}]
+user: Response: [{'generated_text': 'This flower business needs regular watering, proper sunlight, and occasional fertilization. We recommend trimming dead blooms regularly.'}]
+user: How do I care fir my roses?
+Response: [{'generated_text': ' lilies, and seasonal mixes tailored for every occasion.'}]
+user: What do lilies symbolize?
+Response: [{'generated_text': ' purity and refined beauty, making them a popular choice for celebratory events.'}]
+user: Hello
+Response: [{'generated_text': '! How can I help you with your flower business needs today?'}]
+user: where do you work?
+Response: [{'generated_text': ''}]
+user: Do you offer same-day delivery?"
+Response: [{'generated_text': ' in select areas. Please provide your zip code for availability.'}]
+user: Do you offer same-day delivery?
+Response: [{'generated_text': ' in select areas. Please provide your zip code for availability.'}]
+user: Can I request a custom floral arrangement for a wedding?
+Response: [{'generated_text': ''}]
+user: Can I request a custom floral arrangement for a wedding?"
+Response: [{'generated_text': ''}]
+user: Tell me about the latest tech news."
+Response: [{'generated_text': ''}]
+user: Tell me about the latest tech news.
+Response: [{'generated_text': ''}]
+user: Thank you
+Response: [{'generated_text': '.'}]
+user: What types of bouquets do you offer?
+Response: [{'generated_text': ''}]
+user: exit
+Exiting the loop. Goodbye!

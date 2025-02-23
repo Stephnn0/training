@@ -5,9 +5,12 @@ from transformers import (    AutoModelForCausalLM,    AutoTokenizer,
     Trainer,    TrainingArguments)from datasets import Dataset
 import torch
 
-# Load model and tokenizermodel_id = "meta-llama/Llama-3.1-8B"device = "cuda"
+# Load model and tokenizer
 
 
+model_id = "meta-llama/Llama-3.1-8B"
+
+device = "cuda"
 
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 tokenizer.pad_token = tokenizer.eos_token
@@ -19,9 +22,6 @@ model = AutoModelForCausalLM.from_pretrained(    model_id,
     torch_dtype=torch.bfloat16,
     device_map=device
 )
-
-
-
 
 
 # Function to generate training examples

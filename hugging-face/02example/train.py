@@ -118,7 +118,7 @@ trainer = Trainer(
 trainer.train()
 
 # Save the fine-tuned model and tokenizer
-model.save_pretrained("./fine_tuned_model")
-tokenizer.save_pretrained("./fine_tuned_model")
+model.save_pretrained("./Llama3.1-8b")
+tokenizer.save_pretrained("./Tokenizer-files")
 
 print("Model and tokenizer saved to ./fine_tuned_model")

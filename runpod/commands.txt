@@ -1,0 +1,16 @@
+# CLI
+runpodctl
+
+
+# SEND FILE TO POD
+scp -P 43201 -i ~/.ssh/id_ed25519 ~/documents/example.txt root@194.26.196.6:/root/example.txt
+
+
+# RECEIVE FILE FROM POD 
+scp -P 43201 -i ~/.ssh/id_ed25519 root@194.26.196.6:/root/example.txt ~/documents/example.txt
+
+# SEND DIRECTORY
+scp -r -P 43201 -i ~/.ssh/id_ed25519 ~/documents/example_dir root@194.26.196.6:/root/example_dir
+
+# RECEIVE DIRECTORY
+scp -r -P 10089 -i ~/.ssh/example root@69.55.141.65:/workspace/training/Result ~/Documents

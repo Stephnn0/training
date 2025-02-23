@@ -1,37 +1,20 @@
-from transformers import (
-    AutoModelForCausalLM, 
-    AutoTokenizer, 
-    Trainer, 
-    TrainingArguments
-)
+from transformers import AutoModelForCausalLM, AutoTokenizer, Trainer, TrainingArguments
 from datasets import Dataset
 import torch
 
-
-
-# Load model and tokenizer
+# Define your model and device
 model_id = "meta-llama/Llama-3.1-8B"
 device = "cuda"
 
-
-
-
-
+# Load tokenizer and model
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 tokenizer.pad_token = tokenizer.eos_token
-
-
-
 
 model = AutoModelForCausalLM.from_pretrained(
     model_id,
     torch_dtype=torch.bfloat16,
     device_map=device
 )
-
-
-
-
 
 # Function to generate training examples
 def generate_input_output_pair(prompt, target_response):
@@ -61,22 +44,44 @@ def generate_input_output_pair(prompt, target_response):
 
     return {"input_ids": input_ids, "labels": labels}
 
+# Define your flower business Q&A pairs
+qa_pairs = [
+    {
+        "question": "What types of bouquets do you offer?",
+        "answer": "We offer a range of bouquets including roses, lilies, and seasonal mixes tailored for every occasion."
+    },
+    {
+        "question": "How do I care for my roses?",
+        "answer": "Roses thrive with regular watering, proper sunlight, and occasional fertilization. We recommend trimming dead blooms regularly."
+    },
+    {
+        "question": "Do you offer same-day delivery?",
+        "answer": "Yes, we offer same-day delivery in select areas. Please provide your zip code for availability."
+    },
+    {
+        "question": "Can I request a custom floral arrangement for a wedding?",
+        "answer": "Absolutely. We specialize in custom designs. Let's discuss your vision and requirements in detail."
+    },
+    {
+        "question": "What flowers are in season right now?",
+        "answer": "Currently, seasonal options include tulips, daffodils, and peonies. They’re perfect for adding a vibrant touch to any setting."
+    },
+    {
+        "question": "What do lilies symbolize?",
+        "answer": "Lilies often symbolize purity and refined beauty, making them a popular choice for celebratory events."
+    }
+]
 
-
-
-
-# Generate 1000 examples dynamically
+# Generate training examples by duplicating each pair to reach your desired count
 training_data = []
-for i in range(500):
-    training_prompt = [
-        {"role": "user", "content": f"Question {i+1}: Where do you work?"},
-    ]
-    target_response = "I work for Nuflorist"
-    example = generate_input_output_pair(training_prompt, target_response)
-    training_data.append(example)
+num_copies = 500 // len(qa_pairs)  # Adjust to get around 500 examples overall
 
-
-
+for _ in range(num_copies):
+    for pair in qa_pairs:
+        training_prompt = [{"role": "user", "content": pair["question"]}]
+        target_response = pair["answer"]
+        example = generate_input_output_pair(training_prompt, target_response)
+        training_data.append(example)
 
 # Create a Dataset from the examples
 dataset = Dataset.from_dict({
@@ -84,27 +89,17 @@ dataset = Dataset.from_dict({
     "labels": [example["labels"] for example in training_data]
 })
 
-
-
-
-print(training_data)
-
-
-
-
+# Define a collate function to batch examples together
 def collate_fn(batch):
     input_ids = torch.stack([torch.tensor(item["input_ids"]) for item in batch])
     labels = torch.stack([torch.tensor(item["labels"]) for item in batch])
     return {"input_ids": input_ids, "labels": labels}
 
-
-
-
 # Set up the training arguments
 training_args = TrainingArguments(
     output_dir="./results",
-    num_train_epochs=10,               # Adjust as needed
-    per_device_train_batch_size=8,   # Adjust for hardware
+    num_train_epochs=10,               # Adjust epochs as needed
+    per_device_train_batch_size=8,     # Adjust based on your hardware
     learning_rate=1e-4,
     weight_decay=0.01,
     logging_steps=10,
@@ -112,8 +107,6 @@ training_args = TrainingArguments(
     save_steps=500,
     save_total_limit=2,
 )
-
-
 
 # Initialize the Trainer
 trainer = Trainer(

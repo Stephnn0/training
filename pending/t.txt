@@ -1,0 +1,103 @@
+1. Product Description Generation
+Task: Generate detailed, engaging product descriptions that highlight features, care instructions, and the unique aspects of each bouquet.
+
+Example Prompt & Response:
+
+User: “Write a detailed product description for our 'Romantic Red Roses' bouquet, highlighting its elegance and care instructions.”
+Assistant: “Our 'Romantic Red Roses' bouquet is a timeless expression of love, featuring meticulously arranged deep red roses that exude elegance. Each bloom is hand-selected for its perfect form, and included care instructions ensure your bouquet remains fresh and vibrant—ideal for creating unforgettable moments.”
+
+
+
+
+2. Multi-Turn Customer Service Dialogues
+Task: Simulate a realistic conversation with multiple turns to mirror actual customer interactions. This can help the model handle follow-up questions and maintain context.
+
+Example Conversation:
+
+User: “I have a question about ordering a custom bouquet for my anniversary.”
+Assistant: “Certainly! We offer custom bouquets tailored to your preferences. Could you please share more details about the colors, types of flowers, or any specific arrangement ideas you have in mind?”
+
+
+
+
+3. Marketing Copy Generation
+Task: Create creative and engaging social media captions or promotional content that can be used for advertising and brand building.
+
+Example Prompt & Response:
+
+User: “Create an engaging Instagram caption for our new spring collection of flower arrangements.”
+Assistant: “Bloom into spring with our fresh, vibrant flower arrangements! Embrace the season with colors that spark joy and inspire creativity. #SpringVibes #FloralMagic”
+
+
+
+4. Email Response Drafting
+Task: Generate professional email responses to various customer inquiries or complaints, which can enhance customer service communications.
+
+Example Prompt & Response:
+
+User: “Draft an email response to a customer who experienced a delay in their flower delivery.”
+Assistant: “Dear Customer, we sincerely apologize for the delay in your flower delivery. We understand the importance of timely service and are taking steps to prevent future delays. As a token of our apology, please accept a discount on your next order. Thank you for your understanding. Best regards, The Nuflorist Team.”
+
+
+
+5. Summarization Tasks
+Task: Summarize longer pieces of text, such as detailed care instructions or blog posts, into concise overviews that customers can quickly understand.
+
+Example Prompt & Response:
+
+User: “Summarize the following article on flower care: ‘Taking care of your flowers involves regular watering, appropriate sunlight, and proper trimming of dead blooms. Seasonal adjustments and occasional fertilization help maintain their vibrancy.’”
+Assistant: “Proper flower care involves watering, sunlight, trimming dead blooms, seasonal adjustments, and occasional fertilization to keep them vibrant.”
+6. Rewriting/Paraphrasing
+Task: Rephrase existing text to adopt different tones or styles. This can help generate alternative product descriptions or marketing content.
+
+Example Prompt & Response:
+
+User: “Rewrite this product description in a more poetic tone: ‘Our bouquet features fresh roses, lilies, and daisies arranged in a classic style.’”
+Assistant: “Behold a symphony of blooms, where fresh roses, delicate lilies, and cheerful daisies dance together in timeless elegance.”
+
+
+
+# Define additional training examples for various tasks
+additional_examples = [
+    # Product Description Generation
+    {
+        "prompt": [{"role": "user", "content": "Write a detailed product description for our 'Romantic Red Roses' bouquet, highlighting its elegance and care instructions."}],
+        "response": "Our 'Romantic Red Roses' bouquet is a timeless expression of love, featuring meticulously arranged deep red roses that exude elegance. Each bloom is hand-selected and comes with detailed care instructions to ensure lasting freshness."
+    },
+    # Multi-Turn Customer Service Dialogue
+    {
+        "prompt": [{"role": "user", "content": "I have a question about ordering a custom bouquet for my anniversary."}],
+        "response": "Certainly! We offer custom bouquets tailored to your preferences. Could you please share more details about your color preferences and any specific flowers you have in mind?"
+    },
+    # Marketing Copy Generation
+    {
+        "prompt": [{"role": "user", "content": "Create an engaging Instagram caption for our new spring collection of flower arrangements."}],
+        "response": "Bloom into spring with our fresh, vibrant arrangements! Experience the colors of the season and let nature inspire you. #SpringVibes #FloralMagic"
+    },
+    # Email Response Drafting
+    {
+        "prompt": [{"role": "user", "content": "Draft an email response to a customer who experienced a delay in their flower delivery."}],
+        "response": "Dear Customer, we sincerely apologize for the delay in your flower delivery. We understand the inconvenience and are working diligently to improve our service. As a gesture of our apology, please enjoy a discount on your next order. Thank you for your understanding. Best regards, Nuflorist Team."
+    },
+    # Summarization Task
+    {
+        "prompt": [{"role": "user", "content": "Summarize the following article on flower care: 'Taking care of your flowers involves regular watering, appropriate sunlight, and proper trimming of dead blooms. Seasonal adjustments and occasional fertilization help maintain their vibrancy.'"}],
+        "response": "Proper flower care involves watering, sunlight, trimming dead blooms, seasonal adjustments, and occasional fertilization to keep them vibrant."
+    },
+    # Rewriting/Paraphrasing Task
+    {
+        "prompt": [{"role": "user", "content": "Rewrite this product description in a more poetic tone: 'Our bouquet features fresh roses, lilies, and daisies arranged in a classic style.'"}],
+        "response": "Behold a symphony of blooms, where fresh roses, delicate lilies, and cheerful daisies dance together in timeless elegance."
+    },
+]
+
+# Generate training examples for these tasks
+additional_training_data = []
+for example in additional_examples:
+    example_pair = generate_input_output_pair(example["prompt"], example["response"])
+    additional_training_data.append(example_pair)
+
+# Optionally, combine with your existing Q&A training data
+# training_data.extend(additional_training_data)
+# Then create your Dataset from the combined data and proceed with training.
+

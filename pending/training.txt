@@ -1,0 +1,28 @@
+Training Strategy: One Go vs. Multiple Rounds
+Single Extensive Training Run:
+
+Advantages:
+
+All data is incorporated at once, which can be efficient if you have a well-curated, comprehensive dataset.
+Suitable if your dataset is relatively homogeneous or if your domain is limited.
+Considerations:
+
+Risk of overfitting to a particular style or set of questions.
+Might require careful balancing of data to ensure all topics are well-represented.
+
+
+
+
+
+
+Multiple Training Rounds (Incremental Fine-Tuning):
+
+Advantages:
+
+Allows you to gradually introduce new topics (e.g., starting with basic FAQs and then adding more specialized product and care details).
+Easier to monitor and adjust performance on different aspects of your business.
+Can help mitigate catastrophic forgetting by fine-tuning on subsets before merging into a final model.
+Considerations:
+
+Requires a disciplined approach to scheduling and might add complexity in tracking which data has been learned.
+You may need to periodically evaluate the model to ensure it retains previously learned responses.

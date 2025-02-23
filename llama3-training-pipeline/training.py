@@ -136,6 +136,9 @@ def run(rank, world_size):
             #loss.backward(retain_graph=True)
             optimizer.step()
 
+            # model.save()
+            # tokennizer.save()
+
     torch.distributed.destroy_process_group()
 
 if __name__ == "__main__":

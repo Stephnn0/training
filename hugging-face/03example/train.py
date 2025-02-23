@@ -68,6 +68,8 @@ for _ in range(10):
     optimizer.step()
     optimizer.zero_grad()
 
+    # add model.save()
+
     print("loss: ", loss.item())
 
 print("------------------------------ after training ------------------------")

@@ -1,0 +1,29 @@
+Product Inquiries:
+
+User: "What types of bouquets do you offer?"
+Assistant: "We offer a range of bouquets including roses, lilies, and seasonal mixes tailored for every occasion."
+
+
+Care & Maintenance:
+User: "How do I care for my roses?"
+Assistant: "Roses thrive with regular watering, proper sunlight, and occasional fertilization. We recommend trimming dead blooms regularly."
+
+
+Service and Delivery:
+User: "Do you offer same-day delivery?"
+Assistant: "Yes, we offer same-day delivery in select areas. Please provide your zip code for availability."
+
+
+Customization and Special Requests:
+User: "Can I request a custom floral arrangement for a wedding?"
+Assistant: "Absolutely. We specialize in custom designs. Let's discuss your vision and requirements in detail."
+
+
+Seasonal Recommendations:
+User: "What flowers are in season right now?"
+Assistant: "Currently, seasonal options include tulips, daffodils, and peonies. They’re perfect for adding a vibrant touch to any setting."
+
+
+Symbolism & Occasions:
+User: "What do lilies symbolize?"
+Assistant: "Lilies often symbolize purity and refined beauty, making them a popular choice for celebratory events."

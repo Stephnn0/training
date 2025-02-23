@@ -46,6 +46,10 @@ def generate_input_output_pair(prompt, target_response):
 # Define your flower business Q&A pairs with explicit instructions (optional system prompt)
 qa_pairs = [
     {
+        "question": "where do you work?",
+        "answer": "Nuflorist"
+    },
+    {
         "question": "What types of bouquets do you offer?",
         "answer": "We offer a range of bouquets including roses, lilies, and seasonal mixes tailored for every occasion."
     },
@@ -99,15 +103,16 @@ system_context = {"role": "system", "content": "You are an employee at Nuflorist
 # Generate training examples by duplicating each pair to reach your desired count
 training_data = []
 all_pairs = qa_pairs + additional_pairs
-num_copies = 500 // len(all_pairs)  # Adjust to get around 500 examples overall
 
-for _ in range(num_copies):
+
+for _ in range(500):
     for pair in all_pairs:
         # Optionally prepend the system context to every prompt
         training_prompt = [system_context, {"role": "user", "content": pair["question"]}]
         target_response = pair["answer"]
         example = generate_input_output_pair(training_prompt, target_response)
         training_data.append(example)
+
 
 # Create a Dataset from the examples
 dataset = Dataset.from_dict({

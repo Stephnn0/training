@@ -27,3 +27,6 @@ user: What types of bouquets do you offer?
 Response: [{'generated_text': ''}]
 user: exit
 Exiting the loop. Goodbye!
+
+
+

@@ -27,3 +27,4 @@ Assistant: "Currently, seasonal options include tulips, daffodils, and peonies. 
 Symbolism & Occasions:
 User: "What do lilies symbolize?"
 Assistant: "Lilies often symbolize purity and refined beauty, making them a popular choice for celebratory events."
+

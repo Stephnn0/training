@@ -104,6 +104,17 @@ def collate_fn(batch):
     labels = torch.stack([torch.tensor(item["labels"]) for item in batch])
     return {"input_ids": input_ids, "labels": labels}
 
+
+eval_data = [
+    {"question": "What flowers are good for anniversaries?", "answer": "Roses and lilies are popular choices for anniversaries, symbolizing love and commitment."},
+    {"question": "Can I track my flower delivery?", "answer": "Yes, you’ll receive a tracking link once your order is dispatched."},
+]
+
+eval_dataset = Dataset.from_dict({
+    "input_ids": [generate_input_output_pair(pair["question"], pair["answer"])["input_ids"] for pair in eval_data],
+    "labels": [generate_input_output_pair(pair["question"], pair["answer"])["labels"] for pair in eval_data]
+})
+
 # Set up the training arguments
 training_args = TrainingArguments(
     output_dir="./results",
@@ -115,6 +126,8 @@ training_args = TrainingArguments(
     logging_dir="./logs",
     save_steps=500,
     save_total_limit=2,
+    evaluation_strategy="steps",
+    eval_steps=100,                     # Evaluate performance regularly
     warmup_steps=200                    # Add warmup for better training stability
 )
 
@@ -123,6 +136,7 @@ trainer = Trainer(
     model=model,
     args=training_args,
     train_dataset=dataset,
+    eval_dataset=eval_dataset,
     data_collator=collate_fn,
 )
 

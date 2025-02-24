@@ -1,4 +1,4 @@
-# pip install transformers peft bitsandbytes trl deepeval huggingface_hub
+# pip install transformers peft bitsandbytes trl deepeval huggingface_hub, datasets
 
 import os
 import torch

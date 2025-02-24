@@ -1,5 +1,8 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 
+a = './tuning_results/checkpoint-625'
+
+
 model = AutoModelForCausalLM.from_pretrained("./tuned-llama-3-8b")
 tokenizer = AutoTokenizer.from_pretrained("./tuned-llama-3-8b")
 

@@ -38,9 +38,11 @@ tokenizer.pad_token = tokenizer.eos_token
 tokenizer.padding_side = "right"
 
 # Convert qa_pairs to a dataset format
-train_dataset = data
+# train_dataset = data
+# train_dataset = Dataset.from_dict(data * 100)
 
-train_dataset = Dataset.from_dict(data * 100)
+expanded_data = data * 100
+train_dataset = Dataset.from_dict({"text": [entry["text"] for entry in expanded_data]})
 
 for i in range(len(train_dataset)):
     print(train_dataset[i])

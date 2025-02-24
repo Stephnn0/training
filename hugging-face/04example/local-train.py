@@ -10,6 +10,8 @@ from trl import SFTTrainer
 from huggingface_hub import login
 from custom import data
 
+from datasets import Dataset
+
 hf_token = ''
 login(token=hf_token)
 
@@ -37,6 +39,12 @@ tokenizer.padding_side = "right"
 
 # Convert qa_pairs to a dataset format
 train_dataset = data
+
+train_dataset = Dataset.from_dict(data * 100)
+
+for i in range(len(train_dataset)):
+    print(train_dataset[i])
+
 
 peft_config = LoraConfig(
     lora_alpha=16,

@@ -16,3 +16,5 @@ scp -r -P 43201 -i ~/.ssh/id_ed25519 ~/documents/example_dir root@194.26.196.6:/
 # RECEIVE DIRECTORY
 scp -r -P 37372 -i ~/.ssh/tapiastephano0@gmail.com root@195.26.232.153:/workspace/training/hugging-face/04example/tuned-llama-3-8b ~/Documents/ai
 
+
+scp -r -P 26488 -i ~/.ssh/tapiastephano0@gmail.com /home/system-1/Documents/ai/tuning_results/checkpoint-550 root@38.147.83.21:/workspace/training/hugging-face/04example/tuning_results

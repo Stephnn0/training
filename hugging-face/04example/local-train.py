@@ -12,6 +12,7 @@ from custom import data
 
 from datasets import Dataset
 
+
 hf_token = ''
 login(token=hf_token)
 
@@ -88,4 +89,8 @@ trainer.train()
 new_model = "tuned-llama-3-8b"
 trainer.model.save_pretrained(new_model)
 trainer.tokenizer.save_pretrained(new_model)
+
+# Save the fine-tuned model and tokenizer
+#model.save_pretrained("./Llama3.1-8b")
+#tokenizer.save_pretrained("./Tokenizer-files")
 
